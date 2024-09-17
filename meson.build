@@ -19,7 +19,8 @@ gjspolkitagent = shared_library(
   dependencies: [
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
-    # dependency('polkit-agent-1')
+    dependency('libsecret-1'),
+    dependency('libnm')
   ],
   install: true
 )
