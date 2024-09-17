@@ -12,14 +12,14 @@ datadir = join_paths(prefix, get_option('datadir'))
 
 dependency('gobject-introspection-1.0', version: '>= 1.49.1')
 
-libsources = ['src/shell-polkit-agent.c', 'src/shell-polkit-agent.h']
+libsources = ['src/shell-network-agent.c', 'src/shell-network-agent.h']
 gjspolkitagent = shared_library(
-  'gjspolkit',
+  'gjsnetworkagent',
   sources: libsources,
   dependencies: [
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
-    dependency('polkit-agent-1')
+    # dependency('polkit-agent-1')
   ],
   install: true
 )
@@ -29,11 +29,11 @@ gir = gnome.generate_gir(
   gjspolkitagent,
   sources: libsources,
   nsversion: '0.1',
-  namespace: 'GjsPolkit',
+  namespace: 'GjsNetworkAgent',
   # The prefixes don't match the namespace due to the extraction from Gnome Shell.
   symbol_prefix: 'shell',
   identifier_prefix: 'Shell',
-  includes: ['GObject-2.0', 'Gio-2.0', 'PolkitAgent-1.0'],
+  includes: ['GObject-2.0', 'Gio-2.0', 'NM-1.0'],
   install_dir_gir: datadir,
   install_dir_typelib: libdir,
   install: true
